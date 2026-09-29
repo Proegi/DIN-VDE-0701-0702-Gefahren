@@ -20,6 +20,9 @@ header.kopf h1{margin:2px 0 0;font-size:1.9rem;color:var(--ink)}
 button{font:inherit;cursor:pointer;border:none;border-radius:4px;padding:8px 16px;background:var(--blau);color:#fff;font-weight:600}
 button:hover{background:var(--blau-2)}
 button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.kopf-knoepfe{display:flex;gap:10px;flex-wrap:wrap}
+button.loeschen{background:#fff;color:var(--bad);border:1.5px solid var(--bad)}
+button.loeschen:hover{background:#FBEAEA}
 .hinweis{background:#FFF4E0;border-left:6px solid var(--orange);padding:12px 16px;margin-bottom:22px}
 .hinweis strong{display:block;margin-bottom:2px}
 .info{background:var(--blau-hell);padding:12px 16px;margin:12px 0}
@@ -73,7 +76,7 @@ details.tipp div{padding:6px 12px;margin-top:4px;background:var(--line-2);displa
     <div class="lf">Fachkraft für Veranstaltungstechnik</div>
     <h1>DIN VDE 0701/0702: Wenn Messungen fehlschlagen</h1>
   </div>
-  <button class="noprint" onclick="window.print()">PDF speichern</button>
+  <div class="noprint kopf-knoepfe"><button type="button" class="vt-wipe-btn loeschen">Alle Eingaben löschen</button><button type="button" onclick="window.print()">PDF speichern</button></div>
 </header>
 
 <div class="hinweis">
@@ -474,7 +477,7 @@ function pruefe(btn){
 .vt-tools button:hover{background:rgba(128,128,128,.16)}
 @media print{.vt-tools{display:none}}
 </style>
-<div class="vt-tools"><button type="button" id="vt-wipe">Alle Eingaben löschen</button></div>
+<div class="vt-tools"><button type="button" onclick="window.print()">PDF speichern</button> <button type="button" id="vt-wipe" class="vt-wipe-btn">Alle Eingaben löschen</button></div>
 <script>
 (function(){
   var PREFIX = 'vt-0701-0702-gefahren:';
@@ -540,8 +543,7 @@ function pruefe(btn){
       if (k && k.indexOf(PREFIX) === 0) { try { store.removeItem(k); } catch (e) {} }
     }
   }
-  var wipe = document.getElementById('vt-wipe');
-  if (wipe) {
+  Array.prototype.forEach.call(document.querySelectorAll('.vt-wipe-btn'), function(wipe){
     wipe.addEventListener('click', function(){
       if (!window.confirm('Wirklich alle Eingaben auf diesem Blatt löschen?')) { return; }
       wiping = true;
@@ -557,7 +559,7 @@ function pruefe(btn){
       });
       window.location.reload();
     });
-  }
+  });
 })();
 </script>
 </body>
