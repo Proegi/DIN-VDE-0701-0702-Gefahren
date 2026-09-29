@@ -1,0 +1,564 @@
+<!-- Loesung: DIN_0701_0702_Gefahren_Loesung.md -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DIN VDE 0701/0702: Wenn Messungen fehlschlagen</title>
+<style>
+:root{
+  --blau:#004993; --blau-2:#1D4E9E; --blau-hell:#D4EAFA; --orange:#F39100;
+  --ink:#202020; --ink-2:#545454; --ink-3:#8A8A8A; --line:#DADADA; --line-2:#E8E8E8;
+  --ok:#1E6B4F; --bad:#B32C22;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:"Segoe UI",Arial,Helvetica,sans-serif;line-height:1.5}
+.wrap{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+header.kopf{border-bottom:4px solid var(--blau);padding-bottom:12px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+header.kopf .lf{color:var(--blau);font-weight:600;font-size:.95rem}
+header.kopf h1{margin:2px 0 0;font-size:1.9rem;color:var(--ink)}
+button{font:inherit;cursor:pointer;border:none;border-radius:4px;padding:8px 16px;background:var(--blau);color:#fff;font-weight:600}
+button:hover{background:var(--blau-2)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.hinweis{background:#FFF4E0;border-left:6px solid var(--orange);padding:12px 16px;margin-bottom:22px}
+.hinweis strong{display:block;margin-bottom:2px}
+.info{background:var(--blau-hell);padding:12px 16px;margin:12px 0}
+.fall{margin:34px 0 0;padding:16px 20px;background:#FFF4E0;border-left:6px solid var(--orange)}
+.fall h2{margin:0 0 8px;font-size:1.45rem;color:var(--ink)}
+.fall p{margin:8px 0}
+section.aufgabe{border:1px solid var(--line);border-top:4px solid var(--blau);padding:18px 20px;margin:22px 0;border-radius:2px}
+section.aufgabe h3{margin:0 0 10px;color:var(--blau);font-size:1.25rem}
+.klein{font-size:.88rem;color:var(--ink-2)}
+label{display:block;margin:12px 0 4px;font-weight:600}
+.zahl-zeile{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0}
+.zahl-zeile span.bez{min-width:230px}
+input.zahl{font:inherit;width:120px;padding:5px 8px;border:1.5px solid var(--line);text-align:right}
+select.wahl{font:inherit;padding:5px 8px;border:1.5px solid var(--line);max-width:100%}
+.mc label,.radio label{display:flex;gap:10px;align-items:flex-start;font-weight:400;margin:8px 0;cursor:pointer}
+.mc input,.radio input{margin-top:5px;flex:0 0 auto}
+.text-eingabe{width:100%;min-height:90px;font:inherit;padding:8px;border:2px solid var(--blau);background:var(--blau-hell);overflow-wrap:break-word}
+.text-eingabe:empty::before{content:attr(data-platzhalter);color:var(--ink-3)}
+.text-eingabe:focus{outline:2px solid var(--orange);outline-offset:1px}
+details.tipp{margin:6px 0 4px;font-size:.92rem}
+details.tipp summary{cursor:pointer;color:var(--blau);font-weight:600}
+details.tipp div{padding:6px 12px;margin-top:4px;background:var(--line-2);display:inline-block}
+.pruefen{display:flex;align-items:flex-start;gap:14px;margin-top:14px;flex-wrap:wrap}
+.ergebnis{font-weight:600;flex:1;min-width:220px}
+.ergebnis.ok{color:var(--ok)} .ergebnis.bad{color:var(--bad)}
+.ergebnis .tipptext{display:block;font-weight:400;color:var(--ink)}
+.tabelle{width:100%;border-collapse:collapse;margin:10px 0;background:#fff}
+.tabelle th,.tabelle td{border:1px solid #999;padding:7px 10px;text-align:left;vertical-align:top}
+.tabelle thead th{background:#eee}
+.protokoll{max-width:520px}
+.protokoll td.bad{color:var(--bad);font-weight:600}
+.protokoll td.ok{color:var(--ok);font-weight:600}
+.abschluss td .text-eingabe{min-height:60px}
+.quelle{font-size:.82rem;color:var(--ink-2);margin-top:4px}
+@media print{
+  @page{margin:14mm}
+  body{font-size:10.5pt}
+  .wrap{max-width:none;padding:0}
+  .noprint,.hinweis,.pruefen,details.tipp{display:none!important}
+  section.aufgabe{break-inside:avoid-page;page-break-inside:avoid;margin:12px 0}
+  .info,.fall{background:#fff;border:1px solid var(--line)}
+  .text-eingabe{background:#fff;border:1px solid #999}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="kopf">
+  <div>
+    <div class="lf">Fachkraft für Veranstaltungstechnik</div>
+    <h1>DIN VDE 0701/0702: Wenn Messungen fehlschlagen</h1>
+  </div>
+  <button class="noprint" onclick="window.print()">PDF speichern</button>
+</header>
+
+<div class="hinweis">
+  <strong>Hinweis:</strong> Deine Eingaben werden nur lokal in diesem Browser gespeichert. Sichere sie dir selbstständig, sonst können sie zum Beispiel beim Löschen der Browserdaten verloren gehen.
+</div>
+
+<p>Bei der Prüfung nach DIN VDE 0701/0702 fallen immer wieder Geräte durch. Sie bekommen einen Sperraufkleber und dürfen nicht mehr eingesetzt werden. In den folgenden Fällen ist genau das schiefgegangen. Du rechnest nach, was dabei am Gerät und am Menschen passiert. Zuerst erarbeitest du dir die Grundlagen dafür.</p>
+
+<!-- ============ GRUNDLAGEN ============ -->
+<div class="fall">
+  <h2>Grundlagen: Strom durch den menschlichen Körper</h2>
+  <p>Lies im Buch im Kapitel 7.1 „Gefahren im Umgang mit dem elektrischen Strom“ die Abschnitte zum Körperwiderstand und zu den Wirkungen des Stroms auf den Körper und bearbeite anschließend die Aufgaben.</p>
+</div>
+
+<section class="aufgabe">
+  <h3>Aufgabe 1: Kennwerte</h3>
+  <p>Trage die Werte ein, mit denen du auf diesem Blatt weiterrechnest.</p>
+  <div class="zahl-zeile">
+    <span class="bez">Körperwiderstand für Berechnungen</span>
+    <input class="zahl" id="g1r" inputmode="decimal" data-soll="1000" data-tol="0.5"> Ω
+  </div>
+  <div class="zahl-zeile">
+    <span class="bez">lebensgefährlich ab einer Stromstärke von</span>
+    <input class="zahl" id="g1i" inputmode="decimal" data-soll="50" data-tol="0.1"
+      data-fehler='[[0.05,0.001,"Gefragt ist der Wert in mA."]]'> mA
+  </div>
+  <div class="zahl-zeile">
+    <span class="bez">lebensgefährlich ab einer Wechselspannung von</span>
+    <input class="zahl" id="g1u" inputmode="decimal" data-soll="50" data-tol="0.1"
+      data-fehler='[[120,0.5,"120 V gilt für Gleichspannung."]]'> V
+  </div>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 2: Wann ist der Körperwiderstand kleiner?</h3>
+  <p>In welchen Situationen ist der Körperwiderstand kleiner als üblich?</p>
+  <div class="mc">
+    <label><input type="checkbox" id="g2a" data-r="1"> Nach dem Abbau im Regen sind deine Hände nass.</label>
+    <label><input type="checkbox" id="g2b" data-r="0"> Du trägst trockene Lederhandschuhe.</label>
+    <label><input type="checkbox" id="g2c" data-r="1"> Du umfasst ein Traversenrohr mit der ganzen Hand, statt es nur mit einem Finger anzutippen.</label>
+    <label><input type="checkbox" id="g2d" data-r="0"> Du stehst mit Sicherheitsschuhen auf einem trockenen Holzpodest.</label>
+    <label><input type="checkbox" id="g2e" data-r="1"> Nach einem langen Aufbautag bist du stark verschwitzt.</label>
+  </div>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 3: Wirkungsbereiche</h3>
+  <p>Werte das Diagramm zu den Zeit-Strom-Bereichen aus und ordne jedem Bereich seine Wirkung zu.</p>
+  <table class="tabelle">
+    <thead><tr><th style="width:22%">Bereich</th><th>Wirkung</th></tr></thead>
+    <tbody>
+      <tr><td>AC-1</td><td><select class="wahl" id="g3a" data-korrekt="a"><option value=""></option><option value="c">Muskelverkrampfung, Loslassen nicht mehr möglich</option><option value="a">nicht wahrnehmbar</option><option value="d">Herzkammerflimmern bis Herz- und Atemstillstand</option><option value="b">wahrnehmbar, Loslassen noch möglich</option></select></td></tr>
+      <tr><td>AC-2</td><td><select class="wahl" id="g3b" data-korrekt="b"><option value=""></option><option value="d">Herzkammerflimmern bis Herz- und Atemstillstand</option><option value="b">wahrnehmbar, Loslassen noch möglich</option><option value="a">nicht wahrnehmbar</option><option value="c">Muskelverkrampfung, Loslassen nicht mehr möglich</option></select></td></tr>
+      <tr><td>AC-3</td><td><select class="wahl" id="g3c" data-korrekt="c"><option value=""></option><option value="b">wahrnehmbar, Loslassen noch möglich</option><option value="d">Herzkammerflimmern bis Herz- und Atemstillstand</option><option value="c">Muskelverkrampfung, Loslassen nicht mehr möglich</option><option value="a">nicht wahrnehmbar</option></select></td></tr>
+      <tr><td>AC-4</td><td><select class="wahl" id="g3d" data-korrekt="d"><option value=""></option><option value="a">nicht wahrnehmbar</option><option value="c">Muskelverkrampfung, Loslassen nicht mehr möglich</option><option value="b">wahrnehmbar, Loslassen noch möglich</option><option value="d">Herzkammerflimmern bis Herz- und Atemstillstand</option></select></td></tr>
+    </tbody>
+  </table>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 4: Diagramm ablesen</h3>
+  <p>In welchem Bereich liegen die folgenden Stromschläge?</p>
+  <table class="tabelle">
+    <thead><tr><th>Strom durch den Körper</th><th>Einwirkdauer</th><th>Bereich</th></tr></thead>
+    <tbody>
+      <tr><td>20 mA</td><td>0,05 s</td><td><select class="wahl" id="g4a" data-korrekt="2"><option value=""></option><option value="1">AC-1</option><option value="2">AC-2</option><option value="3">AC-3</option><option value="4">AC-4</option></select></td></tr>
+      <tr><td>0,4 mA</td><td>10 s</td><td><select class="wahl" id="g4b" data-korrekt="1"><option value=""></option><option value="1">AC-1</option><option value="2">AC-2</option><option value="3">AC-3</option><option value="4">AC-4</option></select></td></tr>
+      <tr><td>20 mA</td><td>10 s</td><td><select class="wahl" id="g4c" data-korrekt="3"><option value=""></option><option value="1">AC-1</option><option value="2">AC-2</option><option value="3">AC-3</option><option value="4">AC-4</option></select></td></tr>
+    </tbody>
+  </table>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<!-- ============ FALL 1 ============ -->
+<div class="fall">
+  <h2>Fall 1: Die gesperrte Stufenlinse</h2>
+  <p>Im Lager eures Verleihs ist eine Stufenlinse 1 kW (Schutzklasse I, Metallgehäuse) bei der Wiederholungsprüfung durchgefallen:</p>
+  <table class="tabelle protokoll">
+    <thead><tr><th>Messung</th><th>Messwert</th></tr></thead>
+    <tbody>
+      <tr><td>Schutzleiterwiderstand</td><td class="bad">keine Verbindung</td></tr>
+      <tr><td>Ergebnis</td><td class="bad">nicht bestanden, gesperrt</td></tr>
+    </tbody>
+  </table>
+  <p>Der Schutzleiter ist im Stecker abgerissen. Eine Aushilfe übersieht den Sperraufkleber und packt die Lampe für ein Stadtfest in ein Case. Dort wird sie an eine Traverse in 3 m Höhe gehängt. Beim Aufbau scheuert die Anschlussleitung an der scharfkantigen Kabeldurchführung durch, der Außenleiter berührt jetzt das Metallgehäuse.</p>
+</div>
+
+<section class="aufgabe">
+  <h3>Aufgabe 5: Spannung am Gehäuse</h3>
+  <p>Die Stufenlinse leuchtet ganz normal weiter. Welche Spannung liegt jetzt zwischen dem Metallgehäuse und Erde?</p>
+  <div class="zahl-zeile">
+    <span class="bez">Spannung Gehäuse gegen Erde</span>
+    <input class="zahl" id="a1u" inputmode="decimal" data-soll="230" data-tol="1"
+      data-fehler='[[0,0.5,"Überlege, ob die Spannung über den abgerissenen Schutzleiter irgendwohin abfließen kann."]]'> V
+  </div>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 6: Strom durch den Körper</h3>
+  <p>Dein Kollege steht auf einer Leiter und richtet die Stufenlinse aus. Er fasst mit einer Hand an das Gehäuse und hält sich mit der anderen Hand an der Traverse fest. Die Traverse ist geerdet. Rechne mit dem Körperwiderstand aus Aufgabe 1.</p>
+  <div class="zahl-zeile">
+    <span class="bez">Strom durch den Körper</span>
+    <input class="zahl" id="a2i" inputmode="decimal" data-soll="230" data-tol="1"
+      data-fehler='[[0.23,0.005,"Dein Ergebnis ist in Ampere. Gefragt ist der Wert in mA."]]'> mA
+  </div>
+  <details class="tipp noprint"><summary>Hinweis</summary><div>I = U / R</div></details>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 7: Auf der Leiter</h3>
+  <p>Dein Kollege stand beim Stromschlag auf der Leiter, 3 m über dem Boden. Welche Aussagen stimmen?</p>
+  <div class="mc">
+    <label><input type="checkbox" id="a9a" data-r="0"> Bei diesem Strom kann dein Kollege das Gehäuse in jedem Fall sofort wieder loslassen.</label>
+    <label><input type="checkbox" id="a9b" data-r="1"> Durch das plötzliche Zusammenzucken der Muskeln kann er das Gleichgewicht verlieren und von der Leiter stürzen.</label>
+    <label><input type="checkbox" id="a9c" data-r="0"> Solange der Strom nicht länger als eine Sekunde fließt, besteht keine Lebensgefahr.</label>
+    <label><input type="checkbox" id="a9d" data-r="1"> Ein Sturz aus 3 m Höhe kann zusätzlich zum Stromschlag schwere Verletzungen verursachen.</label>
+    <label><input type="checkbox" id="a9e" data-r="1"> Nach dem Stromschlag sollte er sich trotzdem ärztlich untersuchen lassen.</label>
+  </div>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 8: Der Schutzleiter in eigenen Worten</h3>
+  <p>Beschreibe in eigenen Worten, was der Schutzleiter ist und wie er dich schützt.</p>
+  <div class="text-eingabe" id="e1" contenteditable="true"></div>
+</section>
+
+<!-- ============ FALL 2 ============ -->
+<div class="fall">
+  <h2>Fall 2: Die korrodierte Kabeltrommel</h2>
+  <p>Eine Kabeltrommel hat eine korrodierte Schutzleiterklemme. Bei der Prüfung wurde ein Schutzleiterwiderstand von 6 Ω gemessen, die Trommel ist gesperrt. Weil ein Durchgangsprüfer am Schutzleiter „Durchgang“ anzeigt, wird sie trotzdem für einen Auftritt in einer alten Stadthalle mitgenommen. Die Steckdosen dort sind nur mit Leitungsschutzschaltern B16 abgesichert, einen FI gibt es in dem Altbau nicht.</p>
+  <p>An der Trommel hängt eine Nebelmaschine (Schutzklasse I, Metallgehäuse). In ihr löst sich ein Draht vom Heizblock und berührt das Gehäuse. Der Fehlerstrom fließt jetzt über den Außenleiter zum Gehäuse und über den Schutzleiter zurück.</p>
+</div>
+
+<section class="aufgabe">
+  <h3>Aufgabe 9: Schaltet der Leitungsschutzschalter ab?</h3>
+  <p>Der Widerstand der übrigen Fehlerschleife (Netz und Außenleiter bis zum Gerät) beträgt 1,3 Ω. Eine intakte Kabeltrommel hätte einen Schutzleiterwiderstand von 0,4 Ω. Berechne den Fehlerstrom für beide Kabeltrommeln.</p>
+  <p>Ein Leitungsschutzschalter B16 schaltet sofort ab, wenn mindestens 80 A fließen. Bei kleineren Strömen schaltet er erst nach Sekunden oder Minuten ab. Entscheide für beide Fälle.</p>
+  <div class="zahl-zeile">
+    <span class="bez">Fehlerstrom, intakte Trommel</span>
+    <input class="zahl" id="b10a" inputmode="decimal" data-soll="135.3" data-tol="1.5"
+      data-fehler='[[575,1,"Der Fehlerstrom fließt nicht nur durch den Schutzleiter der Trommel, sondern durch die ganze Fehlerschleife."]]'> A
+  </div>
+  <div class="zahl-zeile">
+    <span class="bez">Leitungsschutzschalter</span>
+    <select class="wahl" id="b10b" data-korrekt="s"><option value=""></option><option value="v">schaltet verzögert ab</option><option value="s">schaltet sofort ab</option></select>
+  </div>
+  <div class="zahl-zeile">
+    <span class="bez">Fehlerstrom, korrodierte Trommel</span>
+    <input class="zahl" id="b10c" inputmode="decimal" data-soll="31.5" data-tol="0.5"
+      data-fehler='[[38.3,0.5,"Der Fehlerstrom fließt nicht nur durch den Schutzleiter der Trommel, sondern durch die ganze Fehlerschleife."]]'> A
+  </div>
+  <div class="zahl-zeile">
+    <span class="bez">Leitungsschutzschalter</span>
+    <select class="wahl" id="b10d" data-korrekt="v"><option value=""></option><option value="s">schaltet sofort ab</option><option value="v">schaltet verzögert ab</option></select>
+  </div>
+  <details class="tipp noprint"><summary>Hinweis</summary><div>R = R<sub>Schleife</sub> + R<sub>PE</sub> &nbsp;&nbsp; I = U / R</div></details>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 10: Spannung am Gehäuse</h3>
+  <p>Solange der Fehlerstrom fließt, fällt am Schutzleiter der Trommel eine Spannung ab. Genau diese Spannung liegt zwischen dem Gehäuse der Nebelmaschine und Erde. Berechne sie für die korrodierte Trommel.</p>
+  <div class="zahl-zeile">
+    <span class="bez">Spannung Gehäuse gegen Erde</span>
+    <input class="zahl" id="b11" inputmode="decimal" data-soll="189" data-tol="2"
+      data-fehler='[[5.25,0.1,"Spannung ist nicht Strom geteilt durch Widerstand."],[41,1,"Gefragt ist die Spannung am Schutzleiter der Trommel, nicht an der übrigen Fehlerschleife."]]'> V
+  </div>
+  <details class="tipp noprint"><summary>Hinweis</summary><div>U = R · I</div></details>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 11: Bewertung</h3>
+  <p>Welche Aussagen stimmen?</p>
+  <div class="mc">
+    <label><input type="checkbox" id="b12a" data-r="1"> Das Gehäuse der Nebelmaschine liegt so lange auf lebensgefährlicher Spannung, bis der Leitungsschutzschalter verzögert abschaltet, unter Umständen minutenlang.</label>
+    <label><input type="checkbox" id="b12b" data-r="0"> Weil mit der korrodierten Trommel weniger Fehlerstrom fließt, ist der Fehler ungefährlicher als mit der intakten Trommel.</label>
+    <label><input type="checkbox" id="b12c" data-r="0"> Ein Durchgangsprüfer, der am Schutzleiter „Durchgang“ anzeigt, beweist, dass der Schutzleiter in Ordnung ist.</label>
+    <label><input type="checkbox" id="b12d" data-r="1"> Der Schutzleiter ist zwar angeschlossen, sorgt aber nicht mehr dafür, dass die Schutzeinrichtung schnell abschaltet.</label>
+    <label><input type="checkbox" id="b12e" data-r="1"> Mit einem FI mit 30 mA im Stromkreis wäre sofort abgeschaltet worden.</label>
+  </div>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 12: Der Schutzleiterwiderstand in eigenen Worten</h3>
+  <p>Beschreibe in eigenen Worten, was der Schutzleiterwiderstand ist und warum er möglichst klein sein muss.</p>
+  <div class="text-eingabe" id="e2" contenteditable="true"></div>
+</section>
+
+<!-- ============ FALL 3 ============ -->
+<div class="fall">
+  <h2>Fall 3: Der Aktivlautsprecher im Regen</h2>
+  <p>Auf einem Open Air steht ein Aktivlautsprecher der Schutzklasse II am Bühnenrand. Das Gehäuse ist aus Kunststoff. Auf der Rückseite sitzt das Verstärkermodul: eine Aluminiumplatte mit Kühlrippen, in die Netzbuchse, Netzschalter und Lautstärkeregler eingebaut sind. Direkt dahinter liegt das Netzteil.</p>
+  <p>Die Aluminiumplatte kann man von außen anfassen. Sie ist nicht mit einem Schutzleiter verbunden, denn Geräte der Schutzklasse II haben keinen. Von den netzspannungsführenden Teilen des Netzteils trennt sie nur die Isolierung.</p>
+</div>
+
+<section class="aufgabe">
+  <h3>Aufgabe 13: Was bedeutet der Grenzwert?</h3>
+  <p>Bei der Isolationsmessung misst das Prüfgerät den Widerstand zwischen den Netzkontakten (Außenleiter und Neutralleiter) und der Aluminiumplatte. Für Schutzklasse II muss er mindestens 2 MΩ betragen.</p>
+  <p>Ein Lautsprecher liegt genau auf diesem Grenzwert. Berechne den Strom, der bei 230 V durch eine Person fließt, die die Aluminiumplatte anfasst und auf dem Boden steht. Den Körperwiderstand kannst du hier weglassen, weil er im Vergleich zu 2 MΩ sehr klein ist. Bestimme anschließend den Bereich im Diagramm, auch wenn der Strom länger fließt.</p>
+  <div class="zahl-zeile">
+    <span class="bez">Strom durch den Körper</span>
+    <input class="zahl" id="a8i" inputmode="decimal" data-soll="0.115" data-tol="0.006"
+      data-fehler='[[0.000115,0.00001,"Dein Ergebnis ist in Ampere. Gefragt ist der Wert in mA."],[115,1,"Prüfe die Umrechnung von MΩ in Ω."],[115000,1000,"Prüfe die Umrechnung von MΩ in Ω."]]'> mA
+  </div>
+  <details class="tipp noprint"><summary>Hinweis</summary><div>I = U / R &nbsp;&nbsp; 1 MΩ = 1 000 000 Ω</div></details>
+  <div class="zahl-zeile">
+    <span class="bez">Bereich</span>
+    <select class="wahl" id="a8w" data-korrekt="1"><option value=""></option><option value="1">AC-1</option><option value="2">AC-2</option><option value="3">AC-3</option><option value="4">AC-4</option></select>
+  </div>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 14: Nach dem Regenguss</h3>
+  <p>Während eines Regengusses läuft Wasser durch die Lüftungsschlitze auf die Platine des Netzteils. Eine Messung ergibt danach nur noch 0,01 MΩ zwischen den Netzkontakten und der Aluminiumplatte. Ein Stagehand dreht den Lautsprecher und fasst dabei die Aluminiumplatte an, mit den Füßen steht er auf dem nassen Bühnenboden. Berechne den Strom durch seinen Körper und bestimme den Bereich, wenn er länger fließt.</p>
+  <div class="zahl-zeile">
+    <span class="bez">Strom durch den Körper</span>
+    <input class="zahl" id="a9i" inputmode="decimal" data-soll="21.9" data-tol="1.2"
+      data-fehler='[[0.021,0.002,"Dein Ergebnis ist in Ampere. Gefragt ist der Wert in mA."],[230,1,"Denk an die Isolierung, der Strom muss auch durch sie hindurch."],[0.23,0.01,"Denk an die Isolierung, der Strom muss auch durch sie hindurch."],[23000,100,"Prüfe die Umrechnung von MΩ in Ω."]]'> mA
+  </div>
+  <details class="tipp noprint"><summary>Hinweis</summary><div>R = R<sub>ISO</sub> + R<sub>K</sub> &nbsp;&nbsp; I = U / R</div></details>
+  <div class="zahl-zeile">
+    <span class="bez">Bereich</span>
+    <select class="wahl" id="a9w" data-korrekt="3"><option value=""></option><option value="1">AC-1</option><option value="2">AC-2</option><option value="3">AC-3</option><option value="4">AC-4</option></select>
+  </div>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 15: Hilft der FI hier?</h3>
+  <p>Dieser Stromkreis hat einen FI mit 30 mA Bemessungsfehlerstrom. Ein solcher FI muss spätestens bei 30 mA auslösen, darf aber schon ab 15 mA auslösen. Was bedeutet das für den Stagehand?</p>
+  <div class="radio" data-korrekt="b" data-erklaerung="Der Strom durch den Stagehand liegt zwischen 15 mA und 30 mA. In diesem Bereich darf der FI auslösen, er muss es aber erst ab 30 mA. Löst er nicht aus, fließt der Strom weiter und liegt bei längerer Einwirkdauer im Bereich AC-3: Die Muskeln verkrampfen, der Stagehand kann die Aluminiumplatte nicht mehr loslassen.">
+    <label><input type="radio" name="a10" id="a10a" value="a"> Der FI löst sicher sofort aus, weil der Strom über den Körper zur Erde fließt.</label>
+    <label><input type="radio" name="a10" id="a10b" value="b"> Der FI kann auslösen, muss es aber nicht. Im ungünstigen Fall fließt der Strom weiter, während der Stagehand sich verkrampft.</label>
+    <label><input type="radio" name="a10" id="a10c" value="c"> Der FI kann gar nicht auslösen, weil Geräte der Schutzklasse II keinen Schutzleiter haben.</label>
+    <label><input type="radio" name="a10" id="a10d" value="d"> Der Leitungsschutzschalter löst aus, weil durch das Wasser ein Kurzschluss entsteht.</label>
+  </div>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 16: Der Isolationswiderstand in eigenen Worten</h3>
+  <p>Beschreibe in eigenen Worten, was der Isolationswiderstand ist und warum er möglichst groß sein muss.</p>
+  <div class="text-eingabe" id="e3" contenteditable="true"></div>
+</section>
+
+<!-- ============ FALL 4 ============ -->
+<div class="fall">
+  <h2>Fall 4: Die Moving Heads an der Traverse</h2>
+  <p>An einer Traverse hängen 8 LED-Moving-Heads (Schutzklasse I). Die Stromversorgung wird von Gerät zu Gerät durchgeschleift, alle hängen an einem Stromkreis mit einem FI mit 30 mA Bemessungsfehlerstrom.</p>
+  <p>Die Netzteile der Moving Heads haben Entstörkondensatoren. Über sie fließt im Betrieb ständig ein kleiner Strom in den Schutzleiter. Er kommt nicht über den Neutralleiter zurück, der FI zählt ihn also mit. Aus den Prüfprotokollen:</p>
+  <table class="tabelle protokoll">
+    <thead><tr><th>Gerät</th><th>Schutzleiterstrom</th><th>Ergebnis</th></tr></thead>
+    <tbody>
+      <tr><td>7 Moving Heads</td><td>je 1,1 mA</td><td class="ok">bestanden</td></tr>
+      <tr><td>1 Moving Head, Netzteilfilter defekt</td><td>4,6 mA</td><td class="bad">nicht bestanden, gesperrt</td></tr>
+    </tbody>
+  </table>
+  <p>Weil ein Gerät fehlte, wurde der gesperrte Moving Head trotzdem mitgenommen.</p>
+</div>
+
+<section class="aufgabe">
+  <h3>Aufgabe 17: Vorbelastung des FI</h3>
+  <p>Als Praxisregel gilt nach DIN VDE 0100-530: Die Summe der Schutzleiterströme hinter einem FI soll höchstens 30 % seines Bemessungsfehlerstroms betragen. Berechne die Summe der Schutzleiterströme an dieser Traverse und entscheide, ob die Regel eingehalten ist.</p>
+  <div class="zahl-zeile">
+    <span class="bez">Summe der Schutzleiterströme</span>
+    <input class="zahl" id="a11i" inputmode="decimal" data-soll="12.3" data-tol="0.05"
+      data-fehler='[[7.7,0.05,"Der gesperrte Moving Head hängt auch an der Traverse."],[8.8,0.05,"Der gesperrte Moving Head hat nicht 1,1 mA."],[5.7,0.05,"Es hängen 7 intakte Geräte an der Traverse, nicht eines."]]'> mA
+  </div>
+  <label for="a11w">Ist die Praxisregel eingehalten?</label>
+  <select class="wahl" id="a11w" data-korrekt="n">
+    <option value=""></option>
+    <option value="j">ja</option>
+    <option value="n">nein</option>
+  </select>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 18: Wie viele dürfen dran?</h3>
+  <p>Wie viele intakte Moving Heads mit je 1,1 mA Schutzleiterstrom dürfen nach der Praxisregel höchstens an diesem FI hängen?</p>
+  <div class="zahl-zeile">
+    <span class="bez">Anzahl Moving Heads</span>
+    <input class="zahl" id="a12n" inputmode="numeric" data-soll="8" data-tol="0"
+      data-fehler='[[27,0,"Der FI hat 30 mA, nach der Praxisregel darfst du davon nur einen Teil ausnutzen."],[13,0,"Die Praxisregel ist nicht die Hälfte, sondern 30 %."],[9,0,"Mit 9 Geräten wärst du knapp über der Grenze. Rechne nach."]]'>
+  </div>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 19: „Der FI hält das locker aus“</h3>
+  <p>Ein Kollege sagt: „Der FI löst doch erst bei 30 mA aus, die 12,3 mA sind locker drin.“ Welche Aussagen stimmen?</p>
+  <div class="mc">
+    <label><input type="checkbox" id="a13a" data-r="1"> Der FI darf schon ab 15 mA auslösen, der Abstand ist also viel kleiner, als der Kollege denkt.</label>
+    <label><input type="checkbox" id="a13b" data-r="0"> Schutzleiterströme fließen über den Schutzleiter und werden vom FI deshalb gar nicht erfasst.</label>
+    <label><input type="checkbox" id="a13c" data-r="1"> Kommt während der Show ein kleiner zusätzlicher Fehlerstrom dazu, zum Beispiel durch Feuchtigkeit, löst der FI aus und die ganze Traverse ist dunkel.</label>
+    <label><input type="checkbox" id="a13d" data-r="0"> Ein zu hoher Schutzleiterstrom führt zu einem Kurzschluss, deshalb löst zuerst der Leitungsschutzschalter aus.</label>
+    <label><input type="checkbox" id="a13e" data-r="1"> Ist der Schutzleiter in einer Durchschleifverbindung unterbrochen, fließt der Schutzleiterstrom der dahinter hängenden Geräte über eine Person, die ein Gehäuse berührt.</label>
+  </div>
+  <div class="pruefen noprint"><button type="button" onclick="pruefe(this)">Prüfen</button><span class="ergebnis" aria-live="polite"></span></div>
+</section>
+
+<section class="aufgabe">
+  <h3>Aufgabe 20: Der Schutzleiterstrom in eigenen Worten</h3>
+  <p>Beschreibe in eigenen Worten, was der Schutzleiterstrom ist und wodurch er entsteht.</p>
+  <div class="text-eingabe" id="e4" contenteditable="true"></div>
+</section>
+
+<!-- ============ ABSCHLUSS ============ -->
+<section class="aufgabe">
+  <h3>Aufgabe 21: Zusammenfassung</h3>
+  <p>Beschreibe für jede Messung, was im Einsatz passieren kann, wenn ein Gerät mit diesem Messergebnis trotzdem verwendet wird.</p>
+  <table class="tabelle abschluss">
+    <thead><tr><th style="width:32%">Messergebnis</th><th>Mögliche Folge im Einsatz</th></tr></thead>
+    <tbody>
+      <tr><td>Schutzleiterwiderstand unterbrochen</td><td><div class="text-eingabe" id="a14a" contenteditable="true"></div></td></tr>
+      <tr><td>Schutzleiterwiderstand zu hoch</td><td><div class="text-eingabe" id="a14b" contenteditable="true"></div></td></tr>
+      <tr><td>Isolationswiderstand zu niedrig</td><td><div class="text-eingabe" id="a14c" contenteditable="true"></div></td></tr>
+      <tr><td>Schutzleiterstrom zu hoch</td><td><div class="text-eingabe" id="a14d" contenteditable="true"></div></td></tr>
+      <tr><td>Berührungsstrom zu hoch</td><td><div class="text-eingabe" id="a14e" contenteditable="true"></div></td></tr>
+    </tbody>
+  </table>
+</section>
+
+</div>
+
+<script>
+function zahlLesen(s){
+  s = String(s).replace(/\s/g,'').replace(',', '.').replace(/[^0-9.\-]/g,'');
+  if (s === '' || s === '.' || s === '-') { return null; }
+  var v = parseFloat(s);
+  return isNaN(v) ? null : v;
+}
+function pruefe(btn){
+  var sec = btn.closest('section');
+  var erg = btn.parentNode.querySelector('.ergebnis');
+  var gesamt = 0, richtig = 0, tipps = [];
+
+  sec.querySelectorAll('input.zahl').forEach(function(inp){
+    gesamt++;
+    var v = zahlLesen(inp.value);
+    inp.style.borderColor = '';
+    if (v === null) { return; }
+    var soll = parseFloat(inp.dataset.soll), tol = parseFloat(inp.dataset.tol);
+    if (Math.abs(v - soll) <= tol + 1e-9) { richtig++; inp.style.borderColor = 'var(--ok)'; return; }
+    inp.style.borderColor = 'var(--bad)';
+    var fehler = inp.dataset.fehler ? JSON.parse(inp.dataset.fehler) : [];
+    fehler.forEach(function(f){ if (Math.abs(v - f[0]) <= f[1] + 1e-9) { tipps.push(f[2]); } });
+  });
+
+  sec.querySelectorAll('select.wahl').forEach(function(s){
+    gesamt++;
+    s.style.borderColor = '';
+    if (!s.value) { return; }
+    if (s.value === s.dataset.korrekt) { richtig++; s.style.borderColor = 'var(--ok)'; }
+    else { s.style.borderColor = 'var(--bad)'; }
+  });
+
+  sec.querySelectorAll('.radio').forEach(function(g){
+    gesamt++;
+    var c = g.querySelector('input:checked');
+    g.querySelectorAll('label').forEach(function(l){ l.style.color = ''; });
+    if (!c) { return; }
+    if (c.value === g.dataset.korrekt) { richtig++; c.parentNode.style.color = 'var(--ok)'; if (g.dataset.erklaerung) { tipps.push(g.dataset.erklaerung); } }
+    else { c.parentNode.style.color = 'var(--bad)'; }
+  });
+
+  sec.querySelectorAll('.mc').forEach(function(g){
+    var boxen = g.querySelectorAll('input[type=checkbox]');
+    var fehlerZahl = 0;
+    boxen.forEach(function(b){ if ((b.checked ? '1' : '0') !== b.dataset.r) { fehlerZahl++; } });
+    gesamt++;
+    if (fehlerZahl === 0) { richtig++; erg.className = 'ergebnis ok'; erg.innerHTML = 'Richtig.'; }
+    else { erg.className = 'ergebnis bad'; erg.innerHTML = 'Noch nicht richtig: ' + fehlerZahl + (fehlerZahl === 1 ? ' Aussage ist' : ' Aussagen sind') + ' falsch eingeschätzt.'; }
+  });
+  if (sec.querySelector('.mc')) { return; }
+
+  if (richtig === gesamt) { erg.className = 'ergebnis ok'; erg.innerHTML = (gesamt === 1 ? 'Richtig.' : 'Alles richtig.') + tipps.map(function(t){ return '<span class="tipptext">' + t + '</span>'; }).join(''); }
+  else {
+    erg.className = 'ergebnis bad';
+    erg.innerHTML = (gesamt === 1 ? 'Noch nicht richtig.' : richtig + ' von ' + gesamt + ' richtig.') +
+      tipps.map(function(t){ return '<span class="tipptext">' + t + '</span>'; }).join('');
+  }
+}
+</script>
+<!-- vt-speicher -->
+<style>
+.vt-tools{max-width:960px;margin:8px auto 40px;padding:0 18px}
+.vt-tools button{font:inherit;font-size:.95em;padding:8px 18px;border:1.5px solid currentColor;background:transparent;color:inherit;cursor:pointer}
+.vt-tools button:hover{background:rgba(128,128,128,.16)}
+@media print{.vt-tools{display:none}}
+</style>
+<div class="vt-tools"><button type="button" id="vt-wipe">Alle Eingaben löschen</button></div>
+<script>
+(function(){
+  var PREFIX = 'vt-0701-0702-gefahren:';
+  var EXCLUDE = '';
+  var store = null;
+  try { store = window.localStorage; store.setItem(PREFIX + '__t', '1'); store.removeItem(PREFIX + '__t'); }
+  catch (e) { store = null; }
+  if (!store) { return; }
+
+  function collect(){
+    var out = [];
+    var idx = 0;
+    Array.prototype.forEach.call(document.querySelectorAll('input, textarea, select, [contenteditable="true"]'), function(el){
+      var t = (el.type || '').toLowerCase();
+      if (el.tagName === 'INPUT' && /^(button|submit|reset|password|file|hidden|image)$/.test(t)) { return; }
+      if (EXCLUDE && el.matches(EXCLUDE)) { return; }
+      if (el.closest('.vt-tools')) { return; }
+      var key = el.id ? 'id:' + el.id : 'n' + idx;
+      idx++;
+      out.push({ el: el, key: PREFIX + key, kind: (t === 'checkbox' || t === 'radio') ? 'check' : (el.isContentEditable ? 'rich' : 'value') });
+    });
+    return out;
+  }
+  function read(f){
+    if (f.kind === 'check') { return f.el.checked ? '1' : ''; }
+    if (f.kind === 'rich') { return f.el.textContent; }
+    return f.el.value;
+  }
+  function fire(el, type){ el.dispatchEvent(new Event(type, { bubbles: true })); }
+
+  collect().forEach(function(f){
+    var saved = null;
+    try { saved = store.getItem(f.key); } catch (e) {}
+    if (saved === null) { return; }
+    if (f.kind === 'check') { f.el.checked = (saved === '1'); fire(f.el, 'change'); }
+    else if (f.kind === 'rich') { f.el.textContent = saved; fire(f.el, 'input'); }
+    else { f.el.value = saved; fire(f.el, f.el.tagName === 'SELECT' ? 'change' : 'input'); }
+  });
+
+  var wiping = false;
+  var timer = null;
+  function save(){
+    if (wiping) { return; }
+    collect().forEach(function(f){
+      var val = read(f);
+      try {
+        if (val && String(val).trim()) { store.setItem(f.key, val); } else { store.removeItem(f.key); }
+      } catch (e) {}
+    });
+  }
+  function queue(){
+    if (timer) { clearTimeout(timer); }
+    timer = setTimeout(save, 400);
+  }
+  document.addEventListener('input', queue, true);
+  document.addEventListener('change', queue, true);
+  window.addEventListener('pagehide', save);
+  document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'hidden') { save(); } });
+
+  function dropAll(){
+    for (var i = store.length - 1; i >= 0; i--) {
+      var k = store.key(i);
+      if (k && k.indexOf(PREFIX) === 0) { try { store.removeItem(k); } catch (e) {} }
+    }
+  }
+  var wipe = document.getElementById('vt-wipe');
+  if (wipe) {
+    wipe.addEventListener('click', function(){
+      if (!window.confirm('Wirklich alle Eingaben auf diesem Blatt löschen?')) { return; }
+      wiping = true;
+      if (timer) { clearTimeout(timer); }
+      dropAll();
+      collect().forEach(function(f){
+        try {
+          if (f.kind === 'check') { f.el.checked = false; }
+          else if (f.kind === 'rich') { f.el.textContent = ''; }
+          else if (f.el.tagName === 'SELECT') { f.el.selectedIndex = 0; }
+          else { f.el.value = ''; }
+        } catch (e) {}
+      });
+      window.location.reload();
+    });
+  }
+})();
+</script>
+</body>
+</html>
